@@ -134,7 +134,9 @@ def main():
 
                 ''' visualize and save '''
                 save_name = os.path.join(args.save_path, 'vis_%s_%s_%s_%dipc_exp%d_iter%d.png'%(args.method, args.dataset, args.model, args.ipc, exp, it))
+                save_name_np = os.path.join(args.save_path, 'vis_%s_%s_%s_%dipc_exp%d_iter%d'%(args.method, args.dataset, args.model, args.ipc, exp, it))
                 image_syn_vis = copy.deepcopy(image_syn.detach().cpu())
+                np.save(save_name_np, image_syn_vis.numpy())
                 for ch in range(channel):
                     image_syn_vis[:, ch] = image_syn_vis[:, ch]  * std[ch] + mean[ch]
                 image_syn_vis[image_syn_vis<0] = 0.0
